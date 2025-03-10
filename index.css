@@ -1,0 +1,297 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --accent: #6e56cf;
+  --accent-hover: #7d66d9;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --card-bg: #1a1a1a;
+  --gradient-start: #6e56cf;
+  --gradient-end: #4264d0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-family: "Inter";
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+section {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) 1;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0;
+  width: 100%;
+  background-color: rgba(18, 18, 18, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid;
+  border-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) 1;
+}
+
+header div {
+  display: flex;
+  width: 33.33%;
+  justify-content: center;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cta-button::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0;
+  border-radius: 8px;
+  animation: gradientShift 5s ease infinite;
+  transition: opacity 0.3s ease;
+}
+
+.cta-button:hover::after {
+  opacity: 0.7;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 5px 15px rgba(110, 86, 207, 0.4);
+}
+
+.headerbuttons {
+  display: flex;
+  gap: 20px;
+}
+
+.headerbuttons a:hover {
+  color: var(--accent-hover);
+}
+
+.gradient {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mainpage {
+  padding-top: 15vh;
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainpage h1 {
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.mainpage p {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.mainpage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+.glow-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.glow-element {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  animation: float 15s infinite ease-in-out;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: sparkle 4s infinite;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.services {
+  padding: 80px 0;
+}
+
+.section-title h1 {
+  font-size: 2.5rem;
+}
+
+.section-title p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Добавьте эти стили в ваш CSS файл */
+
+.service-card {
+  border: 2px solid var(--bg-secondary);
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+.service-icon {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  border-radius: 10px;
+}
+
+.service-icon svg {
+  width: 48px;
+  height: 48px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon svg {
+  opacity: 1;
+  stroke: var(--accent);
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: .9rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-40px) scale(1.05);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
