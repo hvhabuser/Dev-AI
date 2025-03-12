@@ -168,84 +168,58 @@
       });
       
       // Переменные для отслеживания свайпов
-      let touchStartX = 0;
-      let touchEndX = 0;
-      const minSwipeDistance = 50; // Минимальное расстояние для распознавания свайпа
-      
-      // Функция для проверки элемента на скроллируемость и направления скролла
+// Переменные для отслеживания свайпов
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+const minSwipeDistance = 50; // Минимальное расстояние для распознавания свайпа
+const maxVerticalDistance = 30; // Максимальное вертикальное отклонение для горизонтального свайпа
+
+// Функции обработки событий касания
+function handleTouchStart(event) {
+  // Сохраняем начальную позицию касания
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+  // Не блокируем события по умолчанию для горизонтальных скроллируемых элементов
+  if (isScrollableHorizontally(event.target)) {
+    return;
+  }
+  
+  touchEndX = event.touches[0].clientX;
+  touchEndY = event.touches[0].clientY;
+  const touchDiffX = touchStartX - touchEndX;
+  const touchDiffY = Math.abs(touchStartY - touchEndY);
+  
+  // Предотвращаем стандартное поведение только если это горизонтальный свайп (не вертикальный)
+  if (Math.abs(touchDiffX) > minSwipeDistance && touchDiffY < maxVerticalDistance) {
+    event.preventDefault();
+  }
+}
+
+function handleTouchEnd(event) {
+  // Вычисляем расстояние свайпа
+  touchEndX = event.changedTouches[0].clientX;
+  touchEndY = event.changedTouches[0].clientY;
+  const touchDiffX = touchStartX - touchEndX;
+  const touchDiffY = Math.abs(touchStartY - touchEndY);
+  
+  // Определяем действие только если свайп был преимущественно горизонтальным
+  if (touchDiffY < maxVerticalDistance) {
+    if (touchDiffX > minSwipeDistance && !mobileMenuOverlay.classList.contains('open')) {
+      // Свайп справа налево - открываем меню
+      openMenu();
+    } else if (touchDiffX < -minSwipeDistance && mobileMenuOverlay.classList.contains('open')) {
+      // Свайп слева направо - закрываем меню
+      closeMenu();
+    }
+  }
+}
       function isScrollableHorizontally(element) {
         return element.scrollWidth > element.clientWidth;
-      }
-      
-      // Функция для проверки, является ли элемент или его родители интерактивными элементами
-      function isInteractiveElement(element) {
-        const interactiveTagNames = ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'];
-        const interactiveRoles = ['button', 'link', 'checkbox', 'radio', 'tab', 'slider'];
-        
-        let current = element;
-        while (current) {
-          // Проверка тега
-          if (interactiveTagNames.includes(current.tagName)) {
-            return true;
-          }
-          
-          // Проверка роли
-          const role = current.getAttribute('role');
-          if (role && interactiveRoles.includes(role)) {
-            return true;
-          }
-          
-          // Проверка горизонтального скролла
-          if (isScrollableHorizontally(current)) {
-            return true;
-          }
-          
-          current = current.parentElement;
-        }
-        
-        return false;
-      }
-      
-      // Функции обработки событий касания
-      function handleTouchStart(event) {
-        // Сохраняем начальную позицию касания
-        touchStartX = event.touches[0].clientX;
-      }
-      
-      function handleTouchMove(event) {
-        // Предотвращаем стандартное поведение только если это потенциальный свайп для меню
-        // и не находимся над интерактивным элементом
-        if (!isInteractiveElement(event.target)) {
-          touchEndX = event.touches[0].clientX;
-          const touchDiff = touchStartX - touchEndX;
-          
-          // Предотвращаем стандартное поведение только если это свайп справа налево (открытие меню)
-          // или свайп слева направо когда меню открыто (закрытие меню)
-          if ((touchDiff > minSwipeDistance && !mobileMenuOverlay.classList.contains('open')) || 
-              (touchDiff < -minSwipeDistance && mobileMenuOverlay.classList.contains('open'))) {
-            event.preventDefault();
-          }
-        }
-      }
-      
-      function handleTouchEnd(event) {
-        // Убедимся, что это не интерактивный элемент
-        if (isInteractiveElement(event.target)) {
-          return;
-        }
-        
-        // Вычисляем расстояние свайпа
-        touchEndX = event.changedTouches[0].clientX;
-        const touchDiff = touchStartX - touchEndX;
-        
-        // Определяем действие в зависимости от направления и расстояния свайпа
-        if (touchDiff > minSwipeDistance) {
-          // Свайп справа налево - открываем меню
-          openMenu();
-        } else if (touchDiff < -minSwipeDistance) {
-          // Свайп слева направо - закрываем меню
-          closeMenu();
-        }
       }
       
       // Добавляем слушатели событий касания к документу

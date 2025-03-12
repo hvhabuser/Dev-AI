@@ -379,6 +379,10 @@ body.loading header {
     display: none;
   }
 
+  header h2 {
+    font-size: 1rem;
+  }
+
   /* Показываем кнопку меню */
   .menu-toggle {
     display: block;
