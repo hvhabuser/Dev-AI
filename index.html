@@ -2,26 +2,33 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Dev AI - Разработка ИИ-помощников для автоматизации и оптимизации бизнес-процессов</title>
+  <title>DevAI - Разработка ИИ ассистентов</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Разрабатываем интеллектуальных помощников на базе нейросетевых технологий, которые автоматизируют рутинные задачи, оптимизируют процессы и повышают эффективность ваших проектов" />
-  <meta name="keywords" content="искусственный интеллект, разработка ИИ, нейросетевые технологии, автоматизация бизнеса, ИИ ассистенты, оптимизация процессов" />
   <meta name="author" content="Dev AI" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Dev AI - Разработка ИИ-помощников для автоматизации бизнеса" />
-  <meta property="og:description" content="Разрабатываем помощников на базе нейросетевых технологий, которые автоматизируют рутинные задачи и повышают эффективность проектов" />
+  <meta property="og:title" content="DevAI - Разработка ИИ ассистентов" />
+  <meta property="og:description" content="Наша компания разрабатывает ИИ ассистентов для помощи в работе вашего проекта, а так же для оптимизации вашей работы" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourwebsite.com/" />
-  <meta property="og:image" content="https://yourwebsite.com/images/og-image.jpg" />
   <link rel="stylesheet" href="index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="loading">
+  <!-- Загрузочный экран -->
+  <div id="loading-screen">
+    <div class="loading-logo">
+      <span class="normal" id="loading-text">Dev</span>
+      <span class="gradient-text" id="loading-gradient"></span>
+      <span class="cursor"></span>
+    </div>
+  </div>
+  
+  <!-- Основной контент сайта (оставляем без изменений) -->
   <header>
     <div>
-      <h2>Dev <span class="gradient">AI</span></h2>
+      <h2>Dev<span class="gradient">AI</span></h2>
     </div>
     <div class="headerbuttons">
       <a href="#services">Услуги</a>
@@ -31,7 +38,19 @@
     <div>
       <a class="cta-button" href="https://t.me/devaicontact">Связаться с нами</a>
     </div>
+    <button class="menu-toggle">☰</button> <!-- Кнопка для открытия меню -->
   </header>
+<!-- Оверлей и мобильное меню -->
+<div class="mobile-menu-overlay">
+  <div class="mobile-menu-blur"></div>
+  <div class="mobile-menu">
+    <div class="mobile-menu-content">
+      <a href="#">Ссылка 1</a>
+      <a href="#">Ссылка 2</a>
+      <a href="#" class="cta-button">Кнопка</a>
+    </div>
+  </div>
+</div>
   <main>
     <section class="mainpage">
       <div id="glow-elements" class="glow-elements"></div>
@@ -85,6 +104,8 @@
             <h3>Обучение ИИ</h3>
             <p>К каждому проекту прилагается сценарий для переобучения модели или для её оптимизации. Вы можете творить всё, что пожелаете, используя уже готовую основу</p>
           </div>
+        </div>
+      </div>
     </section>
   </main>
 </body>

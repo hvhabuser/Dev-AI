@@ -264,6 +264,82 @@ header div {
   color: var(--text-secondary);
   line-height: 1.2;
 }
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease;
+}
+
+.loading-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem;
+  letter-spacing: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.loading-logo .normal {
+  color: var(--text-primary);
+}
+
+.loading-logo .gradient-text {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  margin-left: 12px;
+}
+
+.loading-logo .gradient-text::after {
+  content: 'AI';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(12px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Прячем контент сайта во время загрузки */
+body.loading main, 
+body.loading header {
+  display: none;
+}
+
+/* Стиль для мигающего курсора */
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: var(--text-primary);
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0) scale(1);
@@ -293,5 +369,191 @@ header div {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Адаптация шапки */
+  .headerbuttons {
+    display: none;
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Прозрачный фон */
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  /* Показываем кнопку меню */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--text-primary); /* Цвет текста можно настроить */
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Стили мобильного меню */
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Меню */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Скрыто за правой границей */
+    width: 80%;
+    height: 100%;
+    background-color: transparent; /* Без фона */
+    filter: blur(8px); /* Размытие самого меню */
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  /* Когда меню открыто */
+  .mobile-menu.open {
+    right: 0; /* Выезжает на экран */
+  }
+
+  /* Контент меню (чёткий текст) */
+  .mobile-menu-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 20px;
+    filter: none; /* Убираем размытие для содержимого, если оно наследуется */
+  }
+
+  .mobile-menu-content a {
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+  }
+
+  .mobile-menu-content .cta-button {
+    width: 80%;
+    text-align: center;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  .cta-button {
+    width: 80%;
+    text-align: center;
+    padding: 12px 24px;
+  }
+
+  header .cta-button  {
+    display: none;
+  }
+
+  /* Адаптация главной секции */
+  .mainpage {
+    padding-top: 10vh;
+    padding-bottom: 40px;
+  }
+
+  .mainpage h1 {
+    font-size: 2.5rem;
+  }
+
+  .mainpage p {
+    font-size: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cta-button,
+  .secondary-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Уменьшение визуальных эффектов */
+  .glow-element {
+    filter: blur(30px);
+    opacity: 0.1;
+  }
+
+  .particle {
+    width: 2px;
+    height: 2px;
+  }
+
+  /* Адаптация контейнера */
+  .container {
+    padding: 0 10px;
+  }
+
+  /* Адаптация секции услуг */
+  .services {
+    padding: 40px 0;
+  }
+
+  .section-title h1 {
+    font-size: 2rem;
+  }
+
+  .section-title p {
+    font-size: 0.9rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+  }
+
+  .service-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Адаптация загрузочного экрана */
+  .loading-logo {
+    font-size: 1.5rem;
+  }
+
+  /* Уменьшение толщины границы секций */
+  section {
+    border-bottom: 2px solid;
+  }
+}
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: none;
   }
 }
