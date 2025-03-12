@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  user-select: none;
 }
 
 :root {
@@ -378,19 +379,6 @@ body.loading header {
     display: none;
   }
 
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent; /* Прозрачный фон */
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
   /* Показываем кнопку меню */
   .menu-toggle {
     display: block;
@@ -408,50 +396,84 @@ body.loading header {
   }
 
   /* Меню */
-  .mobile-menu {
+  .mobile-menu-overlay {
     position: fixed;
     top: 0;
-    right: -100%; /* Скрыто за правой границей */
-    width: 80%;
+    left: 0;
+    width: 100%;
     height: 100%;
-    background-color: transparent; /* Без фона */
-    filter: blur(8px); /* Размытие самого меню */
-    transition: right 0.3s ease;
-    z-index: 1000;
+    background-color: rgba(18, 18, 18, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
+  
+  /* Mobile menu with improved blur animation */
+/* Modify the mobile menu overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.7); /* Semi-transparent dark background */
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
-  /* Когда меню открыто */
-  .mobile-menu.open {
-    right: 0; /* Выезжает на экран */
-  }
+/* Mobile menu with solid background */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  height: 100%;
+  background-color: var(--bg-secondary); /* Use the site's secondary background color */
+  border-left: 1px solid var(--accent); /* Accent-colored border */
+  transition: right 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  /* Контент меню (чёткий текст) */
-  .mobile-menu-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    gap: 20px;
-    filter: none; /* Убираем размытие для содержимого, если оно наследуется */
-  }
+/* The open state */
+.mobile-menu.open {
+  right: 0;
+}
 
-  .mobile-menu-content a {
-    font-size: 1.2rem;
-    color: #333;
-    text-decoration: none;
-    padding: 10px;
-  }
+/* Menu content styling */
+.mobile-menu-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 20px;
+  padding: 20px;
+}
 
-  .mobile-menu-content .cta-button {
-    width: 80%;
-    text-align: center;
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-  }
+.mobile-menu-content a {
+  font-size: 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu-content a:hover {
+  color: var(--accent-hover);
+}
+
+.mobile-menu-content .cta-button {
+  width: 100%;
+  text-align: center;
+  padding: 12px 24px;
+}
 
   .cta-button {
     width: 80%;

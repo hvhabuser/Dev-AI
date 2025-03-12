@@ -127,29 +127,129 @@
       });
     });
     document.addEventListener('DOMContentLoaded', function() {
-      const menuToggle = document.querySelector('.menu-toggle'); // Кнопка открытия меню
+      const menuToggle = document.querySelector('.menu-toggle');
       const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
       const mobileMenu = document.querySelector('.mobile-menu');
-    
-      // Функция открытия/закрытия меню
+      
+      // Существующий код для переключения меню
       function toggleMenu() {
         mobileMenuOverlay.classList.toggle('open');
         mobileMenu.classList.toggle('open');
       }
-    
+      
+      function openMenu() {
+        if (!mobileMenuOverlay.classList.contains('open')) {
+          mobileMenuOverlay.classList.add('open');
+          mobileMenu.classList.add('open');
+        }
+      }
+      
+      function closeMenu() {
+        if (mobileMenuOverlay.classList.contains('open')) {
+          mobileMenuOverlay.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        }
+      }
+      
       // Клик по кнопке открытия/закрытия меню
       menuToggle.addEventListener('click', toggleMenu);
-    
+      
       // Закрытие меню при клике вне его (на оверлей)
       mobileMenuOverlay.addEventListener('click', function(event) {
         if (event.target === mobileMenuOverlay) {
           toggleMenu();
         }
       });
-    
+      
       // Закрытие меню при клике на ссылку
       const menuLinks = document.querySelectorAll('.mobile-menu-content a');
       menuLinks.forEach(link => {
         link.addEventListener('click', toggleMenu);
       });
+      
+      // Переменные для отслеживания свайпов
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const minSwipeDistance = 50; // Минимальное расстояние для распознавания свайпа
+      
+      // Функция для проверки элемента на скроллируемость и направления скролла
+      function isScrollableHorizontally(element) {
+        return element.scrollWidth > element.clientWidth;
+      }
+      
+      // Функция для проверки, является ли элемент или его родители интерактивными элементами
+      function isInteractiveElement(element) {
+        const interactiveTagNames = ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'];
+        const interactiveRoles = ['button', 'link', 'checkbox', 'radio', 'tab', 'slider'];
+        
+        let current = element;
+        while (current) {
+          // Проверка тега
+          if (interactiveTagNames.includes(current.tagName)) {
+            return true;
+          }
+          
+          // Проверка роли
+          const role = current.getAttribute('role');
+          if (role && interactiveRoles.includes(role)) {
+            return true;
+          }
+          
+          // Проверка горизонтального скролла
+          if (isScrollableHorizontally(current)) {
+            return true;
+          }
+          
+          current = current.parentElement;
+        }
+        
+        return false;
+      }
+      
+      // Функции обработки событий касания
+      function handleTouchStart(event) {
+        // Сохраняем начальную позицию касания
+        touchStartX = event.touches[0].clientX;
+      }
+      
+      function handleTouchMove(event) {
+        // Предотвращаем стандартное поведение только если это потенциальный свайп для меню
+        // и не находимся над интерактивным элементом
+        if (!isInteractiveElement(event.target)) {
+          touchEndX = event.touches[0].clientX;
+          const touchDiff = touchStartX - touchEndX;
+          
+          // Предотвращаем стандартное поведение только если это свайп справа налево (открытие меню)
+          // или свайп слева направо когда меню открыто (закрытие меню)
+          if ((touchDiff > minSwipeDistance && !mobileMenuOverlay.classList.contains('open')) || 
+              (touchDiff < -minSwipeDistance && mobileMenuOverlay.classList.contains('open'))) {
+            event.preventDefault();
+          }
+        }
+      }
+      
+      function handleTouchEnd(event) {
+        // Убедимся, что это не интерактивный элемент
+        if (isInteractiveElement(event.target)) {
+          return;
+        }
+        
+        // Вычисляем расстояние свайпа
+        touchEndX = event.changedTouches[0].clientX;
+        const touchDiff = touchStartX - touchEndX;
+        
+        // Определяем действие в зависимости от направления и расстояния свайпа
+        if (touchDiff > minSwipeDistance) {
+          // Свайп справа налево - открываем меню
+          openMenu();
+        } else if (touchDiff < -minSwipeDistance) {
+          // Свайп слева направо - закрываем меню
+          closeMenu();
+        }
+      }
+      
+      // Добавляем слушатели событий касания к документу
+      document.addEventListener('touchstart', handleTouchStart, {passive: true});
+      document.addEventListener('touchmove', handleTouchMove, {passive: false});
+      document.addEventListener('touchend', handleTouchEnd, {passive: true});
     });
