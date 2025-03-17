@@ -227,3 +227,29 @@ function handleTouchEnd(event) {
       document.addEventListener('touchmove', handleTouchMove, {passive: false});
       document.addEventListener('touchend', handleTouchEnd, {passive: true});
     });
+
+    const text = "devai.digital";
+    const typingSpeed = 210;
+    const deletingSpeed = 210;
+    let currentIndex = 0;
+    let isDeleting = false;
+    function getRandomSpecialChar() {
+    const specialChars = "!@#$%^&*()-_=+[]{};:'\"|,.<>?/";
+    return specialChars[Math.floor(Math.random() * specialChars.length)];
+    }
+    function animateTitle() {
+    let displayedText = isDeleting
+        ? text.substring(0, currentIndex--) + getRandomSpecialChar()
+        : text.substring(0, currentIndex++) + getRandomSpecialChar();
+    document.title = displayedText;
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+    if (!isDeleting && currentIndex > text.length) {
+        isDeleting = true;
+        delay = 2000;
+    } else if (isDeleting && currentIndex < 0) {
+        isDeleting = false;
+        delay = 500;
+    }
+    setTimeout(animateTitle, delay);
+    }
+    animateTitle();
