@@ -1,3 +1,4 @@
+/* Общие сбросы и базовые стили */
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +7,7 @@
   user-select: none;
 }
 
+/* Переменные */
 :root {
   --bg-primary: #121212;
   --bg-secondary: #1e1e1e;
@@ -18,6 +20,7 @@
   --gradient-end: #4264d0;
 }
 
+/* Базовые стили документа */
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -36,6 +39,7 @@ section {
   border-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) 1;
 }
 
+/* Стили хедера */
 header {
   display: flex;
   justify-content: space-around;
@@ -54,6 +58,16 @@ header div {
   justify-content: center;
 }
 
+.headerbuttons {
+  display: flex;
+  gap: 20px;
+}
+
+.headerbuttons a:hover {
+  color: var(--accent-hover);
+}
+
+/* Стили кнопок */
 .cta-button {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: white;
@@ -83,25 +97,23 @@ header div {
   transition: opacity 0.3s ease;
 }
 
-.cta-button:hover::after {
-  opacity: 0.7;
-}
-
 .cta-button:hover {
   transform: translateY(-2px);
   color: white;
   box-shadow: 0 5px 15px rgba(110, 86, 207, 0.4);
 }
 
-.headerbuttons {
+.cta-button:hover::after {
+  opacity: 0.7;
+}
+
+.button-group {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
-.headerbuttons a:hover {
-  color: var(--accent-hover);
-}
-
+/* Градиентный текст */
 .gradient {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   -webkit-background-clip: text;
@@ -109,6 +121,7 @@ header div {
   -webkit-text-fill-color: transparent;
 }
 
+/* Главная страница */
 .mainpage {
   padding-top: 15vh;
   padding-bottom: 80px;
@@ -130,6 +143,13 @@ header div {
   letter-spacing: 1px;
 }
 
+.mainpage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -139,13 +159,7 @@ header div {
   gap: 3rem;
 }
 
-.mainpage-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 600px;
-}
-
+/* Визуальные эффекты */
 .glow-elements {
   position: absolute;
   top: 0;
@@ -185,31 +199,9 @@ header div {
   animation: sparkle 4s infinite;
 }
 
-.button-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
+/* Секция услуг */
 .services {
   padding: 80px 0;
-}
-
-.section-title h1 {
-  font-size: 2.5rem;
-}
-
-.section-title p {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.2;
-  font-style: italic;
-  letter-spacing: 1px;
 }
 
 .services-grid {
@@ -217,8 +209,6 @@ header div {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
-
-/* Добавьте эти стили в ваш CSS файл */
 
 .service-card {
   border: 2px solid var(--bg-secondary);
@@ -266,6 +256,7 @@ header div {
   line-height: 1.2;
 }
 
+/* Загрузочный экран */
 #loading-screen {
   position: fixed;
   top: 0;
@@ -320,13 +311,6 @@ header div {
   z-index: -1;
 }
 
-/* Прячем контент сайта во время загрузки */
-body.loading main, 
-body.loading header {
-  display: none;
-}
-
-/* Стиль для мигающего курсора */
 .cursor {
   display: inline-block;
   width: 3px;
@@ -336,6 +320,12 @@ body.loading header {
   animation: blink 1s infinite;
 }
 
+body.loading main, 
+body.loading header {
+  display: none;
+}
+
+/* Секция цен */
 .pricing {
   padding: 80px 0;
   position: relative;
@@ -370,12 +360,12 @@ body.loading header {
   z-index: 0;
 }
 
-.pricing-card:hover::before {
-  opacity: 1;
-}
-
 .pricing-card:hover {
   transform: translateY(-10px);
+}
+
+.pricing-card:hover::before {
+  opacity: 1;
 }
 
 .pricing-header {
@@ -450,57 +440,18 @@ body.loading header {
   opacity: 0;
 }
 
+.pricing-button:hover {
+  box-shadow: 0 0 20px rgba(110, 86, 207, 0.5);
+  transform: scale(1.05);
+}
+
 .pricing-button:hover::after {
   top: 100%;
   left: 100%;
   opacity: 1;
 }
 
-.pricing-button:hover {
-  box-shadow: 0 0 20px rgba(110, 86, 207, 0.5);
-  transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-  .pricing {
-    padding: 40px 0;
-  }
-
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .pricing-card {
-    border-radius: 15px 15px 8px 8px;
-  }
-
-  .pricing-header {
-    padding: 15px;
-  }
-
-  .pricing-header h3 {
-    font-size: 1.3rem;
-  }
-
-  .pricing-body {
-    padding: 20px;
-  }
-
-  .pricing-body p {
-    font-size: 0.9rem;
-  }
-
-  .price-value {
-    font-size: 1.8rem;
-  }
-
-  .pricing-button {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
-}
-
+/* Секция кейсов */
 .cases {
   padding: 80px 0;
   position: relative;
@@ -577,170 +528,46 @@ body.loading header {
   width: 10px;
 }
 
-@media (max-width: 768px) {
-  .cases {
-    padding: 40px 0;
-  }
-
-  .cases-grid {
-    gap: 20px;
-  }
-
-  .case-card {
-    padding: 0;
-    transform: perspective(1000px) rotateX(1deg);
-  }
-
-  .case-content {
-    padding: 20px;
-  }
-
-  .case-content h3 {
-    font-size: 1.4rem;
-  }
-
-  .case-content p {
-    font-size: 0.9rem;
-  }
-
-  .case-content h3::after {
-    width: 30px;
-  }
-
-  .case-card:hover .case-content h3::after {
-    width: 50px;
-  }
-
-  .case-accent {
-    width: 4px;
-  }
-
-  .case-card:hover .case-accent {
-    width: 8px;
-  }
+/* Общие стили заголовков секций */
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
 }
 
-@media (min-width: 769px) {
-  .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-
-  .case-card {
-    transform: perspective(1000px) rotateY(5deg);
-  }
-
-  .case-card:nth-child(2n) {
-    transform: perspective(1000px) rotateY(-5deg);
-  }
-
-  .case-card:hover {
-    transform: perspective(1000px) rotateY(0deg) translateY(-5px);
-  }
+.section-title h1 {
+  font-size: 2.5rem;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.section-title p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  font-style: italic;
+  letter-spacing: 1px;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-40px) scale(1.05);
-  }
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.5);
-  }
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  /* Адаптация шапки */
-  .headerbuttons {
-    display: none;
-  }
-
-  header h2 {
-    font-size: 1rem;
-  }
-
-  /* Показываем кнопку меню */
-  .menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    color: var(--text-primary); /* Цвет текста можно настроить */
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  /* Стили мобильного меню */
-  .mobile-menu-overlay.open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Меню */
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(18, 18, 18, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  
-  /* Mobile menu with improved blur animation */
-/* Modify the mobile menu overlay */
+/* Мобильное меню */
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(18, 18, 18, 0.7); /* Semi-transparent dark background */
+  background-color: rgba(18, 18, 18, 0.7);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Mobile menu with solid background */
 .mobile-menu {
   position: fixed;
   top: 0;
   right: -100%;
   width: 80%;
   height: 100%;
-  background-color: var(--bg-secondary); /* Use the site's secondary background color */
-  border-left: 1px solid var(--accent); /* Accent-colored border */
+  background-color: var(--bg-secondary);
+  border-left: 1px solid var(--accent);
   transition: right 0.3s ease;
   z-index: 1000;
   display: flex;
@@ -748,12 +575,10 @@ body.loading header {
   align-items: center;
 }
 
-/* The open state */
 .mobile-menu.open {
   right: 0;
 }
 
-/* Menu content styling */
 .mobile-menu-content {
   position: relative;
   display: flex;
@@ -783,107 +608,128 @@ body.loading header {
   padding: 12px 24px;
 }
 
-  .cta-button {
-    width: 80%;
-    text-align: center;
-    padding: 12px 24px;
+/* Анимации */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) scale(1.05); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.5); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Медиа-запросы для планшетов и мобильных (max-width: 768px) */
+@media (max-width: 768px) {
+  .headerbuttons { display: none; }
+  
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 24px;
+    cursor: pointer;
   }
 
-  header .cta-button  {
-    display: none;
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
   }
 
-  /* Адаптация главной секции */
+  header h2 { font-size: 1rem; }
+  header .cta-button { display: none; }
+  
   .mainpage {
     padding-top: 10vh;
     padding-bottom: 40px;
   }
-
-  .mainpage h1 {
-    font-size: 2.5rem;
-  }
-
-  .mainpage p {
-    font-size: 1rem;
-  }
-
+  
+  .mainpage h1 { font-size: 2.5rem; }
+  .mainpage p { font-size: 1rem; }
+  
   .button-group {
     flex-direction: column;
     gap: 15px;
   }
-
+  
   .cta-button,
   .secondary-button {
     width: 100%;
     text-align: center;
   }
-
-  /* Уменьшение визуальных эффектов */
+  
   .glow-element {
     filter: blur(30px);
     opacity: 0.1;
   }
-
+  
   .particle {
     width: 2px;
     height: 2px;
   }
-
-  /* Адаптация контейнера */
-  .container {
-    padding: 0 10px;
-  }
-
-  /* Адаптация секции услуг */
-  .services {
-    padding: 40px 0;
-  }
-
-  .section-title h1 {
-    font-size: 2rem;
-  }
-
-  .section-title p {
-    font-size: 0.9rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .service-card {
-    padding: 20px;
-  }
-
-  .service-card h3 {
-    font-size: 1.2rem;
-  }
-
-  .service-card p {
-    font-size: 0.9rem;
-  }
-
-  .service-icon svg {
-    width: 36px;
-    height: 36px;
-  }
-
-  /* Адаптация загрузочного экрана */
-  .loading-logo {
-    font-size: 1.5rem;
-  }
-
-  /* Уменьшение толщины границы секций */
-  section {
-    border-bottom: 2px solid;
-  }
+  
+  .container { padding: 0 10px; }
+  
+  .services { padding: 40px 0; }
+  .services-grid { grid-template-columns: 1fr; }
+  
+  .section-title h1 { font-size: 2rem; }
+  .section-title p { font-size: 0.9rem; }
+  
+  .service-card { padding: 20px; }
+  .service-card h3 { font-size: 1.2rem; }
+  .service-card p { font-size: 0.9rem; }
+  .service-icon svg { width: 36px; height: 36px; }
+  
+  .pricing { padding: 40px 0; }
+  .pricing-grid { grid-template-columns: 1fr; gap: 30px; }
+  .pricing-card { border-radius: 15px 15px 8px 8px; }
+  .pricing-header { padding: 15px; }
+  .pricing-header h3 { font-size: 1.3rem; }
+  .pricing-body { padding: 20px; }
+  .pricing-body p { font-size: 0.9rem; }
+  .price-value { font-size: 1.8rem; }
+  .pricing-button { padding: 10px 25px; font-size: 0.9rem; }
+  
+  .cases { padding: 40px 0; }
+  .cases-grid { gap: 20px; }
+  .case-card { padding: 0; transform: perspective(1000px) rotateX(1deg); }
+  .case-content { padding: 20px; }
+  .case-content h3 { font-size: 1.4rem; }
+  .case-content p { font-size: 0.9rem; }
+  .case-content h3::after { width: 30px; }
+  .case-card:hover .case-content h3::after { width: 50px; }
+  .case-accent { width: 4px; }
+  .case-card:hover .case-accent { width: 8px; }
+  
+  .loading-logo { font-size: 1.5rem; }
+  section { border-bottom: 2px solid; }
 }
-@media (min-width: 769px) {
-  .menu-toggle {
-    display: none;
-  }
 
-  .mobile-menu {
-    display: none;
+/* Медиа-запросы для десктопов (min-width: 769px) */
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+  .mobile-menu { display: none; }
+  
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
   }
+  
+  .case-card { transform: perspective(1000px) rotateY(5deg); }
+  .case-card:nth-child(2n) { transform: perspective(1000px) rotateY(-5deg); }
+  .case-card:hover { transform: perspective(1000px) rotateY(0deg) translateY(-5px); }
 }
