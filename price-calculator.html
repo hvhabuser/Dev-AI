@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Рассчитайте стоимость вашего сайта с помощью нашего интерактивного калькулятора. Выберите сложность дизайна, размер страницы, количество страниц и дополнительные опции для получения точной оценки.">
+  <title>Калькулятор стоимости сайта - DevAI</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/LY2fmja.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="price-calculator.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h2><span class="gradient">> </span>Dev<span class="gradient">AI</span><span class="gradient"> <</span></h2>
+    </div>
+    <div class="headerbuttons">
+      <a href="index.html">Главная</a>
+    </div>
+    <button class="menu-toggle">☰</button>
+  </header>
+
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu">
+      <div class="mobile-menu-content">
+        <a href="index.html">Главная</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div id="glow-elements" class="glow-elements"></div>
+    <div id="particles" class="particles"></div>
+    <div class="container">
+      <h1><span class="gradient">Калькулятор</span></h1>
+      <p>Используйте наш калькулятор для оценки стоимости разработки вашего сайта. Выберите параметры, такие как сложность дизайна, размер страницы, количество страниц и дополнительные функции, чтобы получить примерную цену.</p>
+      <div class="calculator">
+        <div class="button-group-container">
+          <div class="button-header">
+            <span class="button-label">Сложность дизайна</span>
+            <span class="price-addon design-price">+200 ₽</span>
+          </div>
+          <div class="button-group" id="designComplexity">
+            <button class="option-button active" data-value="200">Минимум</button>
+            <button class="option-button" data-value="300">Средний</button>
+            <button class="option-button" data-value="500">Стильный</button>
+          </div>
+        </div>
+
+        <div class="button-group-container">
+          <div class="button-header">
+            <span class="button-label">Размер страницы</span>
+            <span class="price-addon size-price">+200 ₽</span>
+          </div>
+          <div class="button-group" id="pageSize">
+            <button class="option-button active" data-value="200">Мелкая</button>
+            <button class="option-button" data-value="300">Средняя</button>
+            <button class="option-button" data-value="500">Крупная</button>
+          </div>
+        </div>
+
+        <div class="button-group-container">
+          <div class="button-header">
+            <span class="button-label">Количество страниц</span>
+            <span class="price-addon pages-price">+200 ₽</span>
+          </div>
+          <div class="button-group" id="pagesCount">
+            <button class="option-button active" data-value="200">Одностраничный</button>
+            <button class="option-button" data-value="500">2-3 страницы</button>
+            <button class="option-button" data-value="2000">5+ страниц</button>
+          </div>
+        </div>
+
+        <div class="toggle-section">
+          <div class="toggle-header">Дополнительные опции</div>
+          <div class="toggle-container">
+            <div class="toggle-item">
+              <span class="toggle-label">У меня есть дизайн</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="hasDesign">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span class="toggle-label">Требуются анимации</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="needsAnimations">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span class="toggle-label">Сложный JS</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="complexJS">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <span class="toggle-label">Срочно</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="urgent">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-container">
+          <span class="price-label">Итоговая стоимость:</span>
+          <span class="price-value" id="totalPrice">600 ₽</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="price-calculator.js"></script>
+</body>
+</html>

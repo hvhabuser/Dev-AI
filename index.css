@@ -608,6 +608,11 @@ body.loading header {
   padding: 12px 24px;
 }
 
+.pricing .button-group .cta-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+}
+
 /* Анимации */
 @keyframes blink {
   0%, 100% { opacity: 1; }
