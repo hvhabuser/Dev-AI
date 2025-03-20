@@ -2,7 +2,7 @@ const prices = {
   design: [200, 300, 500],
   size: [200, 300, 500],
   pages: [200, 500, 2000],
-  hasDesign: [0, 1000],
+  hasDesign: [1000, 0],
   needsAnimations: [0, 300],
   complexJS: [0, 600],
   urgent: [0, 1000]
